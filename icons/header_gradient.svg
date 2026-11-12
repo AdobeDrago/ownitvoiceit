@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="657" viewBox="0 0 1920 657">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.71" y1="1.2" x2="0.705" y2="0.147" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3c98db"/>
+      <stop offset="0.374" stop-color="#add4f0"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect id="iStock-1330774910_copy" data-name="iStock-1330774910 copy" width="1920" height="657" opacity="0.4" fill="url(#linear-gradient)" style="mix-blend-mode: multiply;isolation: isolate"/>
+</svg>
