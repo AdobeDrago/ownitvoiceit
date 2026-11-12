@@ -1,20 +1,106 @@
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+/* footer: social band + legal band (values measured on the source) */
+footer .footer .footer-social,
+footer .footer .footer-legal {
+  background-color: rgb(60 152 219 / 10%);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer .footer-social {
+  padding: 48px 0;
 }
 
-footer .footer p {
+footer .footer .footer-legal {
+  padding: 40px 0;
+}
+
+footer .footer .footer-social-inner,
+footer .footer .footer-legal-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+footer .footer .footer-social-inner {
+  gap: 32px;
+}
+
+footer .footer .footer-legal-inner {
+  flex-direction: column;
+}
+
+footer .footer .footer-brand {
+  display: block;
+  height: 144px;
+  color: rgb(191 10 48);
+}
+
+footer .footer .footer-brand img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+footer .footer ul {
+  display: flex;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
+footer .footer li {
+  margin: 0 0 8px;
+}
+
+footer .footer .footer-social-nav ul {
+  column-gap: 28px;
+  margin-left: 28px;
+}
+
+footer .footer .footer-social-nav a:any-link {
+  color: rgb(88 89 91);
+  font-size: 60px;
+  line-height: 60px;
+}
+
+footer .footer .footer-social-nav svg {
+  display: inline-block;
+  width: auto;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+footer .footer .footer-copy {
+  margin: 0 0 8px;
+  color: rgb(88 89 91);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  text-align: center;
+}
+
+footer .footer .footer-legal-nav ul {
+  column-gap: 40px;
+  margin-left: 40px;
+}
+
+footer .footer .footer-legal-nav a:any-link {
+  color: rgb(88 89 91);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+footer .footer .footer-legal-nav a::before {
+  position: relative;
+  left: -20px;
+  content: "";
+}
+
+footer .footer .footer-legal-nav li + li a::before {
+  content: "|";
 }

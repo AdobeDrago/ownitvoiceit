@@ -1,0 +1,10 @@
+{
+ "repo": "..",
+ "sections": "pages",
+ "da": { "org": "adobedrago", "site": "ownitvoiceit", "dir": "da" },
+ "template": "home",
+ "pages": {
+  "home": { "path": "index", "source": "https://ownitvoiceit.com/", "gate": "gate/home.json", "bundle": "work/bundles/home" }
+ },
+ "fragments": { "_nav": "nav", "_footer": "footer" }
+}

@@ -1,0 +1,50 @@
+{
+ "name": "ownitvoiceit",
+ "source": {
+  "origin": "https://ownitvoiceit.com"
+ },
+ "rebuild": {
+  "origin": "http://localhost:3019",
+  "preview": "https://{ref}--ownitvoiceit--adobedrago.aem.page",
+  "repo": "..",
+  "da": {
+   "org": "adobedrago",
+   "site": "ownitvoiceit"
+  }
+ },
+ "access": {
+  "mode": "live",
+  "profileDir": "work/.browser-profile"
+ },
+ "widths": [
+  1440,
+  1280
+ ],
+ "height": 900,
+ "blockRequests": [],
+ "hide": [
+  "#onetrust-consent-sdk"
+ ],
+ "invisible": [],
+ "freezeCss": [],
+ "hideIframes": true,
+ "consent": true,
+ "video": {
+  "providers": "all"
+ },
+ "carousels": [
+  "slick",
+  "swiper",
+  "hook"
+ ],
+ "scroll": {
+  "max": 20000,
+  "step": 500,
+  "wait": 150
+ },
+ "gate": {
+  "pixel": 0.99,
+  "tolerance": 0.5,
+  "threshold": 0.1
+ }
+}
