@@ -143,6 +143,17 @@ function decorateButtons(main) {
 }
 
 /**
+ * The content pipeline drops paragraphs that hold only a non-breaking space, so authors keep a
+ * blank line as a paragraph with a zero-width space. Turn those back into blank lines.
+ * @param {Element} main The main element
+ */
+function decorateBlankLines(main) {
+  main.querySelectorAll('p').forEach((p) => {
+    if (p.textContent === '\u200b') p.textContent = '\u00a0';
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -153,6 +164,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateBlankLines(main);
 }
 
 /**

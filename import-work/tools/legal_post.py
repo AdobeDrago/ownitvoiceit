@@ -30,6 +30,9 @@ for name in PAGES:
     html = re.sub(r'<table>.*?</table>', table, src, flags=re.S)
     # a link to the old privacy-policy page now points at the rebuilt page
     html = html.replace('href="https://prod.ownitvoiceit.com/privacy-policy/"', 'href="/privacy-policy"')
+    # the pipeline drops paragraphs that hold only a non-breaking space: author a zero-width space,
+    # scripts.js turns it back into a blank line
+    html = html.replace('<p>&nbsp;</p>', '<p>\u200b</p>')
     # the pipeline turns "&nbsp;" next to an inline tag into NBSP + space: author a plain space
     html = re.sub(r'(</(?:strong|em|u|a)>)&nbsp;', r'\1 ', html)
     html = re.sub(r'&nbsp;(<(?:strong|em|u|a)[ >])', r' \1', html)
