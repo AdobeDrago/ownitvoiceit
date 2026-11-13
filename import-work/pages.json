@@ -1,10 +1,40 @@
 {
  "repo": "..",
  "sections": "pages",
- "da": { "org": "adobedrago", "site": "ownitvoiceit", "dir": "da" },
+ "da": {
+  "org": "adobedrago",
+  "site": "ownitvoiceit",
+  "dir": "da"
+ },
  "template": "home",
  "pages": {
-  "home": { "path": "index", "source": "https://ownitvoiceit.com/", "gate": "gate/home.json", "bundle": "work/bundles/home" }
+  "home": {
+   "path": "index",
+   "source": "https://ownitvoiceit.com/",
+   "gate": "gate/home.json",
+   "bundle": "work/bundles/home"
+  },
+  "privacy": {
+   "path": "privacy-policy",
+   "source": "https://ownitvoiceit.com/privacy-policy/",
+   "gate": "gate/privacy.json",
+   "bundle": "work/bundles/privacy"
+  },
+  "terms": {
+   "path": "terms-of-use",
+   "source": "https://ownitvoiceit.com/terms-of-use/",
+   "gate": "gate/terms.json",
+   "bundle": "work/bundles/terms"
+  },
+  "sms": {
+   "path": "text-messaging-policy",
+   "source": "https://ownitvoiceit.com/text-messaging-policy/",
+   "gate": "gate/sms.json",
+   "bundle": "work/bundles/sms"
+  }
  },
- "fragments": { "_nav": "nav", "_footer": "footer" }
+ "fragments": {
+  "_nav": "nav",
+  "_footer": "footer"
+ }
 }

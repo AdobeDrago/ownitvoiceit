@@ -1,0 +1,35 @@
+{
+ "site": "../site.json",
+ "page": "terms",
+ "source": "https://ownitvoiceit.com/terms-of-use/",
+ "rebuild": "http://localhost:3019/terms-of-use",
+ "widths": [
+  1440,
+  1280
+ ],
+ "out": "work/gate/terms",
+ "bundle": "../work/bundles/terms",
+ "timelines": [],
+ "sections": [
+  {
+   "name": "header",
+   "source": "header[role=banner]",
+   "rebuild": "header .header"
+  },
+  {
+   "name": "content",
+   "source": "main",
+   "rebuild": "main > .section:nth-child(1)"
+  },
+  {
+   "name": "footer",
+   "source": "@nth:0:div.bg-neutral",
+   "rebuild": "footer .footer .footer-social"
+  },
+  {
+   "name": "footnote",
+   "source": "@nth:1:div.bg-neutral",
+   "rebuild": "footer .footer .footer-legal"
+  }
+ ]
+}

@@ -379,3 +379,51 @@ main > .section.intro p {
   white-space: nowrap;
   border: 0;
 }
+
+/* legal: long-form policy text in a 1280px container */
+main > .section.legal {
+  margin: 40px 0;
+}
+
+main > .section.legal > div {
+  max-width: 1280px;
+  padding: 0 24px;
+}
+
+main > .section.legal h2,
+main > .section.legal h3 {
+  margin-top: 0;
+  color: rgb(0 40 104);
+  font-weight: 800;
+}
+
+main > .section.legal h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+main > .section.legal h3 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+main > .section.legal p {
+  margin: 0 0 8px;
+}
+
+main > .section.legal ul,
+main > .section.legal ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main > .section.legal li {
+  margin: 0 0 8px;
+}
+
+main > .section.legal a:any-link {
+  text-decoration: underline;
+}
