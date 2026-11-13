@@ -33,6 +33,12 @@ for name in PAGES:
     # the pipeline drops paragraphs that hold only a non-breaking space: author a zero-width space,
     # scripts.js turns it back into a blank line
     html = html.replace('<p>&nbsp;</p>', '<p>\u200b</p>')
+    # the pipeline trims a space at the end of an inline element that is followed by text: author
+    # a zero-width space per space, scripts.js turns it back into a non-breaking space
+    def inner(m):
+        n = m.group(1).count('&nbsp;') + (1 if ' ' in m.group(1).replace('&nbsp;', '') else 0)
+        return '\u200b' * n + m.group(2)
+    html = re.sub(r'((?:&nbsp;| )+)(</(?:strong|em|u|a)>)(?=[^<])', inner, html)
     # the pipeline turns "&nbsp;" next to an inline tag into NBSP + space: author a plain space
     html = re.sub(r'(</(?:strong|em|u|a)>)&nbsp;', r'\1 ', html)
     html = re.sub(r'&nbsp;(<(?:strong|em|u|a)[ >])', r' \1', html)

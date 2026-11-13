@@ -143,14 +143,18 @@ function decorateButtons(main) {
 }
 
 /**
- * The content pipeline drops paragraphs that hold only a non-breaking space, so authors keep a
- * blank line as a paragraph with a zero-width space. Turn those back into blank lines.
+ * The content pipeline drops paragraphs that hold only a non-breaking space and trims the space
+ * at the end of an inline element. Authors keep both with a zero-width space; turn them back
+ * into non-breaking spaces.
  * @param {Element} main The main element
  */
-function decorateBlankLines(main) {
-  main.querySelectorAll('p').forEach((p) => {
-    if (p.textContent === '\u200b') p.textContent = '\u00a0';
-  });
+function decorateZeroWidthSpaces(main) {
+  const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) {
+    if (walker.currentNode.textContent.includes('\u200b')) nodes.push(walker.currentNode);
+  }
+  nodes.forEach((node) => { node.textContent = node.textContent.replace(/\u200b/g, '\u00a0'); });
 }
 
 /**
@@ -164,7 +168,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
-  decorateBlankLines(main);
+  decorateZeroWidthSpaces(main);
 }
 
 /**
