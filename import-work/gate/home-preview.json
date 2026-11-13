@@ -2,7 +2,7 @@
  "site": "../site.json",
  "page": "home",
  "source": "https://ownitvoiceit.com/",
- "rebuild": "https://ownitvoiceit-home-parity--ownitvoiceit--adobedrago.aem.page/",
+ "rebuild": "https://ownitvoiceit-legal-pages--ownitvoiceit--adobedrago.aem.page/",
  "widths": [
   1440,
   1280

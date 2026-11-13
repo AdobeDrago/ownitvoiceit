@@ -1,0 +1,5 @@
+{
+ "root": "main .container",
+ "before": [{ "sel": ":self", "type": "html" }],
+ "beforeFrom": "root"
+}

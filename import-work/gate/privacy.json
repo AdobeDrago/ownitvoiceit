@@ -1,0 +1,35 @@
+{
+ "site": "../site.json",
+ "page": "privacy",
+ "source": "https://ownitvoiceit.com/privacy-policy/",
+ "rebuild": "http://localhost:3019/privacy-policy",
+ "widths": [
+  1440,
+  1280
+ ],
+ "out": "work/gate/privacy",
+ "bundle": "../work/bundles/privacy",
+ "timelines": [],
+ "sections": [
+  {
+   "name": "header",
+   "source": "header[role=banner]",
+   "rebuild": "header .header"
+  },
+  {
+   "name": "content",
+   "source": "main",
+   "rebuild": "main > .section:nth-child(1)"
+  },
+  {
+   "name": "footer",
+   "source": "@nth:0:div.bg-neutral",
+   "rebuild": "footer .footer .footer-social"
+  },
+  {
+   "name": "footnote",
+   "source": "@nth:1:div.bg-neutral",
+   "rebuild": "footer .footer .footer-legal"
+  }
+ ]
+}
