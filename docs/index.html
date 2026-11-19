@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Own It Voice It — ownitvoiceit.com → EDS handover</title>
+<meta name="description" content="Home page, header with tagline, two-band footer and three legal pages (privacy policy, terms of use, text-messaging policy) rebuilt on EDS; PR #1 and PR #2 merged.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    /* Viasat brand (mirrors styles/styles.css and block CSS) */
+    --accent: #2a5db0;
+    --accent-hover: #204b90;
+    --accent-text: #1f4e99; /* AA-compliant on light bg */
+    --accent-on-dark: #9bbcf5;
+    --ink: #1b2433;
+    --ink-alt: #1b2433;
+    --accent-pale: #e8f0fc;
+    
+
+    --gray-50: #ffffff;
+    --gray-75: #fafbfc;
+    --gray-100: #f2f5f8;
+    --gray-200: #e6eaee;
+    --gray-300: #dde2e7;
+    --gray-400: #c4ccd3;
+    --gray-500: #a9b3bc;
+    --gray-600: #5f6b75;
+    --gray-700: #66727c;
+    --gray-800: #465967;
+    --gray-900: #202e39;
+
+    --font: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: 'Source Code Pro', 'Fira Mono', 'Courier New', monospace;
+    --sidebar-width: 248px;
+    --content-max: 940px;
+    --header-h: 56px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--gray-900);
+    background: var(--gray-50);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  a { color: var(--accent-text); }
+
+  /* ── TOP NAV ── */
+  .topnav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    background: var(--ink-alt);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topnav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .topnav-logo .mark {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    background: var(--accent-on-dark);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .topnav-divider { width: 1px; height: 20px; background: #3c4c58; }
+  .topnav-title {
+    color: #d3dae0;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topnav-badge {
+    margin-left: auto;
+    background: var(--accent-on-dark);
+    color: var(--ink);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    border-right: 1px solid var(--gray-200);
+    background: var(--gray-75);
+    padding: 24px 0 40px;
+  }
+  .sidebar-section { margin-bottom: 8px; }
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-600);
+    padding: 8px 20px 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 20px;
+    font-size: 13px;
+    color: var(--gray-800);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+  }
+  .sidebar-link:hover { background: var(--gray-200); color: var(--gray-900); }
+  .sidebar-link.active {
+    background: var(--accent-pale);
+    color: var(--accent-text);
+    border-left-color: var(--accent);
+    font-weight: 700;
+  }
+  .sidebar-link .icon { width: 16px; height: 16px; opacity: 0.6; flex-shrink: 0; }
+  .sidebar-link.active .icon { opacity: 1; }
+
+  /* ── MAIN ── */
+  .main { flex: 1; min-width: 0; padding: 48px 56px 80px; }
+  .main-inner { max-width: var(--content-max); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 48px;
+    scroll-margin-top: calc(var(--header-h) + 48px);
+  }
+  .page-hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-text);
+    margin-bottom: 8px;
+  }
+  .page-hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .page-hero-sub { font-size: 16px; color: var(--gray-700); max-width: 640px; line-height: 1.5; }
+
+  /* ── SECTIONS ── */
+  .doc-section { margin-bottom: 56px; scroll-margin-top: calc(var(--header-h) + 24px); }
+  .doc-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .section-rule { height: 1px; background: var(--gray-200); margin: 12px 0 24px; }
+  .doc-section h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin: 24px 0 8px; }
+  .doc-section p { font-size: 14px; color: var(--gray-800); margin-bottom: 12px; line-height: 1.65; }
+
+  /* ── SECTION ICON BADGE ── */
+  .section-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-purple { background: var(--accent-pale); color: var(--accent); }
+  .icon-ink    { background: #eceef0; color: var(--ink); }
+  .icon-green  { background: #eaf6f1; color: #268e6c; }
+  .icon-seafoam{ background: #e6f4f4; color: #16878c; }
+  .icon-orange { background: #fff4e5; color: #da7b11; }
+  .icon-blue   { background: #e9f1fc; color: #0d51b5; }
+
+  /* ── URL CARDS ── */
+  .url-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .url-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .url-card:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .url-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .url-card-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-purple { background: var(--accent); }
+  .dot-ink    { background: var(--ink); }
+  .dot-green  { background: #268e6c; }
+  .dot-orange { background: #da7b11; }
+  .url-card-title { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+  .url-card-url { font-size: 12px; font-family: var(--mono); color: var(--accent-text); word-break: break-all; }
+  .url-card-desc { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: var(--ink);
+    color: #d4d4d4;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 8px 0 4px;
+    white-space: pre;
+  }
+  .code-block .cmt  { color: #7fb77e; }
+  .code-inline {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-900);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* ── NOTICES ── */
+  .notice {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .notice-icon { flex-shrink: 0; margin-top: 1px; }
+  .notice a { color: inherit; }
+  .notice.info     { background: var(--accent-pale); color: #17396f; border-left: 3px solid var(--accent); }
+  .notice.tip      { background: #eaf6f1; color: #1a6b50; border-left: 3px solid #268e6c; }
+  .notice.warning  { background: #fff4e5; color: #8a4b08; border-left: 3px solid #da7b11; }
+
+  /* ── BLOCKS GRID ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .skill-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 16px; }
+  .skill-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .skill-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .tag-js  { background: #fff8d6; color: #8a5e00; }
+  .tag-core{ background: var(--gray-100); color: var(--gray-700); }
+  .tag-poli{ background: var(--accent-pale); color: var(--accent-text); }
+  .skill-card-name { font-size: 13px; font-weight: 700; color: var(--gray-900); font-family: var(--mono); }
+  .skill-card-desc { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* ── PIPELINE DIAGRAM ── */
+  .arch-diagram { border: 1px solid var(--gray-200); border-radius: 8px; padding: 24px; background: var(--gray-75); margin: 16px 0; }
+  .arch-row { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .arch-node { padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; text-align: center; min-width: 110px; }
+  .arch-arrow { font-size: 18px; color: var(--gray-400); }
+  .node-a { background: var(--accent-pale); color: var(--accent-text); }
+  .node-b { background: #eceef0; color: var(--ink); }
+  .node-c { background: #eaf6f1; color: #1a6b50; }
+  .node-d { background: #fff4e5; color: #8a4b08; }
+
+  /* ── TABLE ── */
+  .table-scroll { overflow-x: auto; }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .spec-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gray-600);
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--gray-200);
+    background: var(--gray-75);
+  }
+  .spec-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-200); color: var(--gray-800); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table td:first-child { font-weight: 700; color: var(--gray-900); }
+  .spec-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ── STAT ROW ── */
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; background: var(--gray-75); }
+  .stat-num { font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+  .stat-label { font-size: 12px; color: var(--gray-600); margin-top: 4px; }
+
+  /* ── SWATCHES ── */
+  .swatch-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+  .swatch { border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; font-size: 12px; }
+  .swatch-chip { height: 44px; }
+  .swatch-meta { padding: 8px 10px; }
+  .swatch-meta strong { display: block; color: var(--gray-900); }
+  .swatch-meta code { font-family: var(--mono); color: var(--gray-600); }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 12px;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .doc-footer a { text-decoration: none; }
+
+  /* ── STATUS PILLS ── */
+  .nav-status {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  .ns-progress { background: #fff4e5; color: #8a4b08; }
+  .ns-done     { background: #eaf6f1; color: #1a6b50; }
+
+  .status-badge {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+  .sb-progress { background: #fff4e5; color: #8a4b08; }
+  .sb-done     { background: #eaf6f1; color: #1a6b50; }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 4px 0; }
+  .check-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--gray-50);
+  }
+  .check-mark {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .cm-done    { background: #eaf6f1; color: #268e6c; }
+  .cm-done::before { content: '✓'; }
+  .cm-partial { background: #fff4e5; color: #da7b11; }
+  .cm-partial::before { content: '–'; }
+  .cm-todo    { background: var(--gray-100); color: var(--gray-500); }
+  .cm-todo::before { content: '○'; }
+  .check-body { flex: 1; }
+  .check-title { font-weight: 700; font-size: 13px; color: var(--gray-900); }
+  .check-note  { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  .req-list { margin: 8px 0 0 18px; font-size: 13px; color: var(--gray-700); }
+  .req-list li { margin-bottom: 4px; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 16px 60px; }
+    .page-hero h1 { font-size: 24px; }
+    .url-grid { grid-template-columns: 1fr; }
+    .topnav-title { display: none; }
+  }
+
+/* ── ADDITIONS FOR PORTFOLIO / SITE PAGES ── */
+.topnav select { margin-left: auto; background: #2a3550; color: #fff; border: 1px solid #3c4c70; border-radius: 6px; padding: 5px 8px; font: inherit; font-size: 13px; max-width: 240px; }
+.topnav-badge { margin-left: 12px; }
+.sidebar-back { display: block; padding: 6px 20px 14px; font-size: 12px; font-weight: 700; text-decoration: none; }
+.pill { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; white-space: nowrap; }
+.pill.done { background: #eaf6f1; color: #1a6b50; }
+.pill.warn { background: #fff4e5; color: #8a4b08; }
+.pill.todo { background: var(--gray-100); color: var(--gray-700); }
+.pill.info { background: var(--accent-pale); color: var(--accent-text); }
+.spec-table td.mono, .mono { font-family: var(--mono); font-size: 12px; }
+.spec-table td a { word-break: break-word; }
+.spec-table tr.sub td { background: var(--gray-75); }
+.muted { color: var(--gray-600); }
+.small { font-size: 12px; }
+details.fold { border: 1px solid var(--gray-200); border-radius: 8px; margin: 12px 0; background: var(--gray-50); }
+details.fold > summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 13px; color: var(--gray-900); }
+details.fold > .fold-body { padding: 0 14px 12px; }
+.da-table { border-collapse: collapse; margin: 10px 0; font-size: 12px; width: 100%; max-width: 640px; background: #fff; }
+.da-table th { background: #f4ecf8; color: #4a2c5e; text-align: left; padding: 6px 10px; border: 1px solid #d9cce3; font-weight: 700; font-family: var(--mono); }
+.da-table td { border: 1px solid #d9cce3; padding: 6px 10px; color: var(--gray-800); vertical-align: top; }
+.da-table td.empty { color: var(--gray-500); font-style: italic; }
+.block-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px 18px; margin: 14px 0; background: var(--gray-50); }
+.block-card h3 { margin-top: 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.block-card h3 code { font-family: var(--mono); }
+.kv { display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; font-size: 13px; margin: 8px 0; }
+.kv dt { color: var(--gray-600); font-weight: 700; }
+.kv dd { color: var(--gray-900); min-width: 0; word-break: break-word; }
+.tree { font-family: var(--mono); font-size: 12.5px; line-height: 1.7; background: var(--gray-75); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 16px; overflow-x: auto; white-space: pre; color: var(--gray-800); }
+.timeline { list-style: none; border-left: 2px solid var(--gray-200); margin: 8px 0 8px 6px; padding-left: 18px; }
+.timeline li { margin-bottom: 10px; font-size: 13px; position: relative; }
+.timeline li::before { content: ''; position: absolute; left: -25px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.timeline .when { color: var(--gray-600); font-size: 12px; font-family: var(--mono); margin-right: 6px; }
+.matrix td, .matrix th { text-align: center; padding: 7px 8px; }
+.matrix td:first-child, .matrix th:first-child { text-align: left; }
+.matrix .yes { color: #1a6b50; font-weight: 700; }
+.matrix .cust { color: var(--accent-text); font-weight: 700; }
+.matrix .no { color: var(--gray-400); }
+.site-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin: 14px 0; }
+.site-card { border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 18px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; background: #fff; transition: border-color .15s, box-shadow .15s; }
+.site-card:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.site-card h3 { margin: 0; font-size: 16px; color: var(--ink); }
+.site-card .dom { font-family: var(--mono); font-size: 12px; color: var(--accent-text); }
+.site-card .meta { font-size: 12px; color: var(--gray-700); display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.site-card p { font-size: 13px; color: var(--gray-800); margin: 4px 0 0; line-height: 1.5; }
+.swatch-chip.bordered { border-bottom: 1px solid var(--gray-200); }
+.type-sample { border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 14px; margin: 6px 0; font-size: 13px; }
+.type-sample b { font-family: var(--mono); font-size: 12px; color: var(--gray-700); }
+.hl-list { margin: 6px 0 12px 18px; font-size: 14px; color: var(--gray-800); line-height: 1.6; }
+.hl-list li { margin-bottom: 4px; }
+.table-scroll { max-width: 100%; }
+@media (max-width: 768px) { .topnav select { max-width: 150px; } .kv { grid-template-columns: 1fr; } .topnav-badge { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="topnav-logo" href="#overview"><span class="mark">R</span>Reynolds EDS</a>
+  <div class="topnav-divider"></div>
+  <span class="topnav-title">ownitvoiceit.com → EDS · Site handover</span>
+  <span class="topnav-badge" style="margin-left:auto">Handover</span>
+</nav>
+<div class="layout">
+<nav class="sidebar" aria-label="Page navigation">
+<div class="sidebar-section"><div class="sidebar-label">Overview</div>
+<a class="sidebar-link active" href="#overview"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z"/></svg>Overview</a>
+<a class="sidebar-link" href="#use-case"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg>Use case &amp; requirements</a>
+<a class="sidebar-link" href="#references"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95z"/></svg>Key references</a>
+<a class="sidebar-link" href="#deliverables"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg>Deliverables</a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">DA.live content</div>
+<a class="sidebar-link" href="#pages"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg>Pages in DA.live</a>
+<a class="sidebar-link" href="#navigation"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8.22 2.97a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06l2.97-2.97H3.75a.75.75 0 010-1.5h7.44L8.22 4.03a.75.75 0 010-1.06z"/></svg>Navigation &amp; links</a>
+<a class="sidebar-link" href="#header"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25zm1.75-.25a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25v-8.5a.25.25 0 00-.25-.25z"/></svg>Header &amp; footer</a>
+<a class="sidebar-link" href="#blocks"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg>Content blocks</a>
+<a class="sidebar-link" href="#brand"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2.5A.5.5 0 013.5 2h9a.5.5 0 01.5.5V4a.5.5 0 01-1 0v-1H8.5v10H10a.5.5 0 010 1H6a.5.5 0 010-1h1.5V3h-3v1a.5.5 0 01-1 0z"/></svg>Brand design system</a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">GitHub</div>
+<a class="sidebar-link" href="#github"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M9.5 3.25a2.25 2.25 0 11-3 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 1111 3.25z"/></svg>GitHub implementation</a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">Quality</div>
+<a class="sidebar-link" href="#fidelity"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Parity gate &amp; results</a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">Handoff</div>
+<a class="sidebar-link" href="#decisions"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg>Decisions &amp; assumptions</a>
+<a class="sidebar-link" href="#limitations"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575z"/></svg>Known limitations</a>
+<a class="sidebar-link" href="#next-steps"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8.22 2.97a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06l2.97-2.97H3.75a.75.75 0 010-1.5h7.44L8.22 4.03a.75.75 0 010-1.06z"/></svg>Next steps</a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">Reference</div>
+<a class="sidebar-link" href="#dev-notes"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg>Developer notes</a>
+</div>
+</nav>
+<main class="main"><div class="main-inner">
+<div class="page-hero" id="overview">
+<div class="page-hero-eyebrow">Site handover · ownitvoiceit.com</div>
+<h1>Own It Voice It on Edge Delivery Services</h1>
+<p class="page-hero-sub">Home page, header with tagline, two-band footer and three legal pages (privacy policy, terms of use, text-messaging policy) rebuilt on EDS; PR #1 and PR #2 merged.</p>
+<p style="margin-top:14px"><span class="pill warn">Migrated · pending QA</span> <span class="muted small">&nbsp;Tracker status: Migrated - pending QA</span></p>
+<div class="stat-row"><div class="stat-card"><div class="stat-num">4</div><div class="stat-label">DA pages (excl. nav/footer)</div></div><div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Blocks in repo</div></div><div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Blocks changed or added</div></div><div class="stat-card"><div class="stat-num">1</div><div class="stat-label">Block variants authored</div></div><div class="stat-card"><div class="stat-num">2/2</div><div class="stat-label">PRs merged / total</div></div><div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Commits on main</div></div></div>
+</div><section class="doc-section" id="use-case">
+<h2><span class="section-icon icon-purple"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg></span>Use case &amp; requirements</h2>
+<div class="section-rule"></div>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Area</th><th>What is built</th></tr></thead><tbody><tr><td>Scope</td><td>Home, privacy-policy, terms-of-use, text-messaging-policy, plus /nav and /footer.</td></tr><tr><td>Visual language</td><td>Montserrat; red link colour (#bf0a30); flag image in the header; header gradient SVG.</td></tr><tr><td>Footer</td><td>Two bands; social icons are Font Awesome SVG paths inlined by footer.js.</td></tr></tbody></table></div><h3>What stands out in this build</h3><ul class="hl-list"><li>table block used for the privacy policy&#x27;s two tables.</li><li>Header tagline (h1) is authored in /nav, as in the source where it sits inside &lt;header&gt;.</li><li>Logo and header gradient served from /icons keeping the source file names so the gate pairs them.</li></ul>
+</section><section class="doc-section" id="references">
+<h2><span class="section-icon icon-blue"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95z"/></svg></span>Key references</h2>
+<div class="section-rule"></div>
+<div class="url-grid"><a class="url-card" href="https://main--ownitvoiceit--adobedrago.aem.page/" target="_blank" rel="noopener">
+<span class="url-card-label"><span class="dot dot-purple"></span>Preview</span>
+<span class="url-card-title">main preview (.aem.page)</span>
+<span class="url-card-url">https://main--ownitvoiceit--adobedrago.aem.page/</span>
+<span class="url-card-desc">Branch main, content previewed from DA</span>
+</a><a class="url-card" href="https://main--ownitvoiceit--adobedrago.aem.live/" target="_blank" rel="noopener">
+<span class="url-card-label"><span class="dot dot-green"></span>Live</span>
+<span class="url-card-title">main live (.aem.live)</span>
+<span class="url-card-url">https://main--ownitvoiceit--adobedrago.aem.live/</span>
+<span class="url-card-desc">Published content only</span>
+</a><a class="url-card" href="https://da.live/#/adobedrago/ownitvoiceit" target="_blank" rel="noopener">
+<span class="url-card-label"><span class="dot dot-ink"></span>Authoring</span>
+<span class="url-card-title">Document Authoring (DA.live)</span>
+<span class="url-card-url">https://da.live/#/adobedrago/ownitvoiceit</span>
+<span class="url-card-desc">Org adobedrago, site ownitvoiceit</span>
+</a><a class="url-card" href="https://github.com/AdobeDrago/ownitvoiceit" target="_blank" rel="noopener">
+<span class="url-card-label"><span class="dot dot-ink"></span>Code</span>
+<span class="url-card-title">GitHub · AdobeDrago/ownitvoiceit</span>
+<span class="url-card-url">https://github.com/AdobeDrago/ownitvoiceit</span>
+<span class="url-card-desc">Code, blocks, styles, import-work ledger</span>
+</a><a class="url-card" href="https://ownitvoiceit.com/" target="_blank" rel="noopener">
+<span class="url-card-label"><span class="dot dot-orange"></span>Production</span>
+<span class="url-card-title">ownitvoiceit.com</span>
+<span class="url-card-url">https://ownitvoiceit.com/</span>
+<span class="url-card-desc">Source site that is being migrated</span>
+</a></div><p class="small muted">HTTP status observed when this page was generated: preview <strong>200</strong>, preview /nav <strong>200</strong>, preview /footer <strong>200</strong>, live <strong>404</strong>, live /nav <strong>404</strong>.</p>
+</section><section class="doc-section" id="deliverables">
+<h2><span class="section-icon icon-seafoam"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg></span>Deliverables</h2>
+<div class="section-rule"></div>
+<ul class="checklist"><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Repository from aem-boilerplate</div><div class="check-note">AdobeDrago/ownitvoiceit with 12 commits on main; branches: main, ownitvoiceit-home-parity, ownitvoiceit-legal-pages.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Brand setup applied</div><div class="check-note">Fonts, logo, favicon, head.html and styles.css tokens committed.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Header and footer fragments in DA</div><div class="check-note">/nav and /footer exist in DA.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Home page authored in DA</div><div class="check-note">index.html: 2 sections, 0 content block(s), 0 image(s).</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Inner pages in DA</div><div class="check-note">3 pages beyond home authored.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Site-specific block code</div><div class="check-note">3 blocks added or changed vs. the boilerplate.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Pull requests merged</div><div class="check-note">2 of 2 merged.</div></div></li><li class="check-item"><span class="check-mark cm-done"></span><div class="check-body"><div class="check-title">Parity ledger committed</div><div class="check-note">import-work/ledger.md is in the repo.</div></div></li><li class="check-item"><span class="check-mark cm-todo"></span><div class="check-body"><div class="check-title">Published to .aem.live</div><div class="check-note">Live returns 404: content is previewed but not yet published.</div></div></li><li class="check-item"><span class="check-mark cm-partial"></span><div class="check-body"><div class="check-title">QA sign-off</div><div class="check-note">Tracker status: Migrated - pending QA.</div></div></li></ul>
+</section><section class="doc-section" id="pages">
+<h2><span class="section-icon icon-purple"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg></span>Pages in DA.live</h2>
+<div class="section-rule"></div>
+<p>DA.live holds <strong>4</strong> content documents plus the <code class="code-inline">/nav</code> and <code class="code-inline">/footer</code> fragments, read via the DA admin list and source APIs. Block names in the table are the class strings of the authored tables.</p><div class="table-scroll"><table class="spec-table"><thead><tr><th>Path (preview link)</th><th>Heading</th><th>Blocks authored</th><th>Sections</th><th>Images</th><th>Modified</th></tr></thead><tbody><tr><td><a href="https://main--ownitvoiceit--adobedrago.aem.page/" target="_blank" rel="noopener">/</a></td><td>Speak up for your community and ensure a better way forward.</td><td><span class="muted">default content</span></td><td>2</td><td>0</td><td>2026-11-13</td></tr><tr><td><a href="https://main--ownitvoiceit--adobedrago.aem.page/privacy-policy" target="_blank" rel="noopener">/privacy-policy</a></td><td>Privacy Policy and Your State Privacy Rights</td><td>table ×2</td><td>2</td><td>0</td><td>2026-11-13</td></tr><tr><td><a href="https://main--ownitvoiceit--adobedrago.aem.page/terms-of-use" target="_blank" rel="noopener">/terms-of-use</a></td><td>Terms of use</td><td><span class="muted">default content</span></td><td>2</td><td>0</td><td>2026-11-13</td></tr><tr><td><a href="https://main--ownitvoiceit--adobedrago.aem.page/text-messaging-policy" target="_blank" rel="noopener">/text-messaging-policy</a></td><td>Text Messaging Policy</td><td><span class="muted">default content</span></td><td>2</td><td>0</td><td>2026-11-13</td></tr></tbody></table></div><h3>DA content tree</h3><div class="tree">da.live/#/adobedrago/ownitvoiceit
+├── footer.html
+├── index.html
+├── nav.html
+├── privacy-policy.html
+├── terms-of-use.html
+├── text-messaging-policy.html
+└── media/   (1 files)
+    ├── (root)  [1]</div>
+</section><section class="doc-section" id="navigation">
+<h2><span class="section-icon icon-blue"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8.22 2.97a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06l2.97-2.97H3.75a.75.75 0 010-1.5h7.44L8.22 4.03a.75.75 0 010-1.06z"/></svg></span>Navigation &amp; links</h2>
+<div class="section-rule"></div>
+<p>Links were read from the authored <code class="code-inline">/nav</code> and <code class="code-inline">/footer</code> documents in DA. An internal link counts as <em>built</em> when a matching document exists in DA; otherwise it still points at a path that has not been migrated.</p><div class="table-scroll"><table class="spec-table"><thead><tr><th>Fragment</th><th>Links</th><th>Built in DA</th><th>Not yet migrated</th><th>External</th></tr></thead><tbody><tr><td>/nav</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>/footer</td><td class="num">8</td><td class="num">4</td><td class="num">0</td><td class="num">4</td></tr></tbody></table></div><details class="fold"><summary>Link labels authored in /nav (1)</summary><div class="fold-body small">Own It Voice It</div></details>
+</section><section class="doc-section" id="header">
+<h2><span class="section-icon icon-ink"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25zm1.75-.25a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25v-8.5a.25.25 0 00-.25-.25z"/></svg></span>Header &amp; footer</h2>
+<div class="section-rule"></div>
+<dl class="kv"><dt>Header block</dt><dd><a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/header/header.js" target="_blank" rel="noopener">blocks/header/header.js</a> (1.9 KB) and <a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/header/header.css" target="_blank" rel="noopener">header.css</a> (1.1 KB)</dd><dt>Content source</dt><dd>DA document <code class="code-inline">/nav</code> loaded as a fragment (present).</dd><dt>Footer block</dt><dd><a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/footer/footer.js" target="_blank" rel="noopener">blocks/footer/footer.js</a> (3.5 KB) and <a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/footer/footer.css" target="_blank" rel="noopener">footer.css</a> (1.8 KB)</dd><dt>Content source</dt><dd>DA document <code class="code-inline">/footer</code> (present).</dd></dl><p class="small muted">/nav: 1 sections, 1 links, 1 images. /footer: 2 sections, 8 links.</p><div class="notice info"><span class="notice-icon">ℹ</span><div>Both fragments are authored in DA as plain sections (no block tables). Section order inside the document drives the header and footer layout, so edit them in DA and re-preview <code class="code-inline">/nav</code> and <code class="code-inline">/footer</code> after any change.</div></div>
+</section><section class="doc-section" id="blocks">
+<h2><span class="section-icon icon-orange"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg></span>Content blocks (DA authoring reference)</h2>
+<div class="section-rule"></div>
+<p>These are the <strong>content blocks authored in DA.live</strong> for this site. Each card shows the table an author builds in DA (first row = block name and variants, following rows = cells) taken from a live document, and where the implementation lives in GitHub.</p><p>Section styles used through a <code class="code-inline">section-metadata</code> block (<em>Style</em> row): <code class="code-inline">intro</code>, <code class="code-inline">legal</code>.</p><div class="block-card">
+<h3><code>table</code> <span class="skill-tag tag-js">Custom / modified</span></h3>
+<p>Plain data table: every authored row becomes a table row, every cell a table cell.</p>
+<table class="da-table"><tr><th colspan="2">table</th></tr><tr><td>Right to Know or Access</td><td>As an eligible resident, you have the right to request that we disclos</td></tr><tr><td>Right to Data Portability</td><td>As an eligible resident, you have the right obtain the personal inform</td></tr><tr><td>Right to Correct</td><td>As an eligible resident, you have the right to request that we correct</td></tr><tr><td>Right to Request Deletion</td><td>As an eligible resident, you have the right to request the deletion of</td></tr><tr><td>Right to Non-Discrimination</td><td>As an eligible resident, you have the right not to receive discriminat</td></tr><tr><td>How To Exercise Your State Privacy Rights; Authorized Agents</td><td>If you are an eligible resident and would like to submit a verifiable</td></tr><tr><td colspan="2" class="empty">… 1 more rows</td></tr></table>
+<dl class="kv">
+<dt>Authored on</dt><dd>2 block instances across 1 page: <code class="code-inline">/privacy-policy</code></dd>
+<dt>Implementation</dt><dd><a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/table/table.js" target="_blank" rel="noopener">blocks/table/table.js</a> (1.2 KB) · <a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/blocks/table/table.css" target="_blank" rel="noopener">table.css</a> (92 B)</dd>
+<dt>CSS variants</dt><dd><span class="muted">none declared</span></dd>
+</dl>
+</div><h3>Blocks in the repo that no authored page uses yet</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>Block</th><th>JS</th><th>CSS</th><th>Status</th></tr></thead><tbody><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/cards" target="_blank" rel="noopener">cards</a></td><td>745 B</td><td>431 B</td><td>Boilerplate, unchanged</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/columns" target="_blank" rel="noopener">columns</a></td><td>568 B</td><td>425 B</td><td>Boilerplate, unchanged</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/footer" target="_blank" rel="noopener">footer</a></td><td>3.5 KB</td><td>1.8 KB</td><td>Header/footer/fragment: loaded by the page shell</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/fragment" target="_blank" rel="noopener">fragment</a></td><td>1.9 KB</td><td>40 B</td><td>Header/footer/fragment: loaded by the page shell</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/header" target="_blank" rel="noopener">header</a></td><td>1.9 KB</td><td>1.1 KB</td><td>Header/footer/fragment: loaded by the page shell</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/hero" target="_blank" rel="noopener">hero</a></td><td>0 B</td><td>504 B</td><td>Boilerplate, unchanged</td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/blocks/widget" target="_blank" rel="noopener">widget</a></td><td>2.9 KB</td><td>30 B</td><td>Boilerplate, unchanged</td></tr></tbody></table></div>
+</section><section class="doc-section" id="brand">
+<h2><span class="section-icon icon-green"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2.5A.5.5 0 013.5 2h9a.5.5 0 01.5.5V4a.5.5 0 01-1 0v-1H8.5v10H10a.5.5 0 010 1H6a.5.5 0 010-1h1.5V3h-3v1a.5.5 0 01-1 0z"/></svg></span>Brand design system</h2>
+<div class="section-rule"></div>
+<p>Tokens are read from <a href="https://github.com/AdobeDrago/ownitvoiceit/blob/main/styles/styles.css" target="_blank" rel="noopener">styles/styles.css</a> (the <code class="code-inline">:root</code> block).</p><h3>Colour tokens</h3><div class="swatch-row"><div class="swatch"><div class="swatch-chip bordered" style="background:white"></div><div class="swatch-meta"><strong>background-color</strong><code>white</code></div></div><div class="swatch"><div class="swatch-chip bordered" style="background:#f8f8f8"></div><div class="swatch-meta"><strong>light-color</strong><code>#f8f8f8</code></div></div><div class="swatch"><div class="swatch-chip bordered" style="background:#505050"></div><div class="swatch-meta"><strong>dark-color</strong><code>#505050</code></div></div><div class="swatch"><div class="swatch-chip bordered" style="background:#000"></div><div class="swatch-meta"><strong>text-color</strong><code>#000</code></div></div><div class="swatch"><div class="swatch-chip bordered" style="background:#bf0a30"></div><div class="swatch-meta"><strong>link-color</strong><code>#bf0a30</code></div></div><div class="swatch"><div class="swatch-chip bordered" style="background:#bf0a30"></div><div class="swatch-meta"><strong>link-hover-color</strong><code>#bf0a30</code></div></div></div><h3>Font families</h3><div class="type-sample"><b>--body-font-family</b><br>Montserrat, &quot;Open Sans&quot;, sans-serif</div><div class="type-sample"><b>--heading-font-family</b><br>Montserrat, &quot;Open Sans&quot;, sans-serif</div><h3>Type scale</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>Token</th><th>Value</th></tr></thead><tbody><tr><td><code class="code-inline">--body-font-size-m</code></td><td>16px</td></tr><tr><td><code class="code-inline">--body-font-size-s</code></td><td>16px</td></tr><tr><td><code class="code-inline">--body-font-size-xs</code></td><td>16px</td></tr><tr><td><code class="code-inline">--heading-font-size-xxl</code></td><td>55px</td></tr><tr><td><code class="code-inline">--heading-font-size-xl</code></td><td>30px</td></tr><tr><td><code class="code-inline">--heading-font-size-l</code></td><td>24px</td></tr><tr><td><code class="code-inline">--heading-font-size-m</code></td><td>24px</td></tr><tr><td><code class="code-inline">--heading-font-size-s</code></td><td>24px</td></tr><tr><td><code class="code-inline">--heading-font-size-xs</code></td><td>22px</td></tr></tbody></table></div><h3>Layout tokens</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>Token</th><th>Value</th></tr></thead><tbody><tr><td><code class="code-inline">--nav-height</code></td><td>64px</td></tr></tbody></table></div><h3>Brand assets committed to GitHub</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>Where</th><th>Files</th></tr></thead><tbody><tr><td>Font files in /fonts</td><td>montserrat-latin.woff2</td></tr><tr><td>Icons in /icons</td><td>header_gradient.svg, logo.svg, ownitvoiceit_logo.svg, search.svg, square-facebook.svg, square-instagram.svg, square-x-twitter.svg, square-youtube.svg</td></tr></tbody></table></div>
+</section><section class="doc-section" id="github">
+<h2><span class="section-icon icon-ink"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M9.5 3.25a2.25 2.25 0 11-3 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 1111 3.25z"/></svg></span>GitHub implementation</h2>
+<div class="section-rule"></div>
+<h3>Repository</h3><dl class="kv"><dt>Repo</dt><dd><a href="https://github.com/AdobeDrago/ownitvoiceit" target="_blank" rel="noopener">AdobeDrago/ownitvoiceit</a></dd><dt>Branches</dt><dd><code class="code-inline">main</code>, <code class="code-inline">ownitvoiceit-home-parity</code>, <code class="code-inline">ownitvoiceit-legal-pages</code></dd><dt>Base commit</dt><dd><code class="code-inline">01fa32f</code> "chore: cleanup repository template"; everything after it is site work.</dd></dl><h3>Pull requests</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>#</th><th>Title</th><th>Branch</th><th>State</th></tr></thead><tbody><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/pull/1" target="_blank" rel="noopener">#1</a></td><td>Rebuild ownitvoiceit.com home as native EDS blocks</td><td><code class="code-inline">ownitvoiceit-home-parity</code></td><td><span class="pill done">merged</span></td></tr><tr><td><a href="https://github.com/AdobeDrago/ownitvoiceit/pull/2" target="_blank" rel="noopener">#2</a></td><td>Rebuild privacy, terms and text-messaging policy pages as native EDS blocks</td><td><code class="code-inline">ownitvoiceit-legal-pages</code></td><td><span class="pill done">merged</span></td></tr></tbody></table></div><h3>Commit history (main)</h3><ul class="timeline"><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/b16b21a" target="_blank" rel="noopener">b16b21a</a> Merge pull request #2 from AdobeDrago/ownitvoiceit-legal-pages</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/f37141a" target="_blank" rel="noopener">f37141a</a> Add ledger for the policy pages</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/f66f717" target="_blank" rel="noopener">f66f717</a> Keep trimmed inline spaces on the policy pages</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/52a8cee" target="_blank" rel="noopener">52a8cee</a> Keep blank lines the pipeline would drop</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/d026cfd" target="_blank" rel="noopener">d026cfd</a> Rebuild privacy, terms and text messaging policy pages</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/63658ac" target="_blank" rel="noopener">63658ac</a> Merge pull request #1 from AdobeDrago/ownitvoiceit-home-parity</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/4b19807" target="_blank" rel="noopener">4b19807</a> Add parity ledger and branch-preview gate config</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/968f032" target="_blank" rel="noopener">968f032</a> Hide sections left empty by the metadata block</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/57bf10a" target="_blank" rel="noopener">57bf10a</a> Rebuild ownitvoiceit.com home at visual parity</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/81394bc" target="_blank" rel="noopener">81394bc</a> Apply brand setup from source site</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/01fa32f" target="_blank" rel="noopener">01fa32f</a> chore: cleanup repository template</li><li><span class="when">2026-11-12</span><a href="https://github.com/AdobeDrago/ownitvoiceit/commit/9ce519b" target="_blank" rel="noopener">9ce519b</a> Initial commit</li></ul><h3>What differs from the boilerplate</h3><p>26 files outside <code class="code-inline">import-work/</code> were added or changed after the base commit.</p><div class="table-scroll"><table class="spec-table"><thead><tr><th>Area</th><th>Files</th><th>Changed files</th></tr></thead><tbody><tr><td><code class="code-inline">(root)</code></td><td>5</td><td>.gitignore, .hlxignore, favicon.ico, favicon.png, head.html</td></tr><tr><td><code class="code-inline">blocks</code></td><td>6</td><td>footer.css, footer.js, header.css, header.js, table.css, table.js</td></tr><tr><td><code class="code-inline">fonts</code></td><td>5</td><td>montserrat-latin.woff2, roboto-bold.woff2, roboto-condensed-bold.woff2, roboto-medium.woff2, roboto-regular.woff2</td></tr><tr><td><code class="code-inline">icons</code></td><td>7</td><td>header_gradient.svg, logo.svg, ownitvoiceit_logo.svg, square-facebook.svg, square-instagram.svg, square-x-twitter.svg, square-youtube.svg</td></tr><tr><td><code class="code-inline">scripts</code></td><td>1</td><td>scripts.js</td></tr><tr><td><code class="code-inline">styles</code></td><td>2</td><td>fonts.css, styles.css</td></tr></tbody></table></div><p><strong>scripts/scripts.js</strong> adds: <code class="code-inline">decorateZeroWidthSpaces</code>.</p><h3>import-work/ (migration tooling committed to the repo)</h3><p>32 files: page section sources under <code class="code-inline">pages/</code>, the DA-ready documents under <code class="code-inline">da/</code>, gate configs under <code class="code-inline">gate/</code>, <code class="code-inline">pages.json</code>, <code class="code-inline">site.json</code> and <code class="code-inline">ledger.md</code>. Open it in <a href="https://github.com/AdobeDrago/ownitvoiceit/tree/main/import-work" target="_blank" rel="noopener">GitHub</a>.</p><h3>Source URL map (import-work/pages.json)</h3><div class="table-scroll"><table class="spec-table"><thead><tr><th>Page key</th><th>Source URL</th></tr></thead><tbody><tr><td><code class="code-inline">home</code></td><td><a href="https://ownitvoiceit.com/" target="_blank" rel="noopener">https://ownitvoiceit.com/</a></td></tr><tr><td><code class="code-inline">privacy</code></td><td><a href="https://ownitvoiceit.com/privacy-policy/" target="_blank" rel="noopener">https://ownitvoiceit.com/privacy-policy/</a></td></tr><tr><td><code class="code-inline">terms</code></td><td><a href="https://ownitvoiceit.com/terms-of-use/" target="_blank" rel="noopener">https://ownitvoiceit.com/terms-of-use/</a></td></tr><tr><td><code class="code-inline">sms</code></td><td><a href="https://ownitvoiceit.com/text-messaging-policy/" target="_blank" rel="noopener">https://ownitvoiceit.com/text-messaging-policy/</a></td></tr></tbody></table></div>
+</section><section class="doc-section" id="fidelity">
+<h2><span class="section-icon icon-green"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span>Parity gate &amp; results</h2>
+<div class="section-rule"></div>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>Local gate (home)</td><td>8/8 pass (100% pixels, 0 mismatches); offsets 8/8</td></tr><tr><td>Legal pages (local)</td><td>privacy 8/8 (100%), terms 8/8 (99.95% content), text-messaging 8/8 (100%)</td></tr><tr><td>Branch preview</td><td>Each page 6/8; the only failures are the header flag image pairing (2 mismatches, pixels 100%)</td></tr><tr><td>Lint</td><td>npm run lint clean</td></tr></tbody></table></div><p class="small muted">The parity gate compares each section of the rebuild with the source at 1440 and 1280 px: pass = ≥99% pixel match and 0 computed-style mismatches. Figures above are quoted from the repo's own ledger and gate files.</p><details class="fold"><summary>Full parity ledger (import-work/ledger.md)</summary><div class="fold-body"><p>Baseline at plan approval: context 138.7k tokens; account extra-usage spend $327.11 (from <code class="code-inline">get_usage</code>). Spend before that point (intake, capture, map) was not metered separately: the first <code class="code-inline">get_usage</code> reading was taken at plan time. Context at that point includes ~54k of system/tools overhead. Gate: ≥99% pixel and 0 computed-style mismatches per section at 1440 and 1280 (default bar, not lowered).</p>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Phase / iteration</th><th>Block / variant</th><th>Change</th><th>Mismatches before→after</th><th>Pixel before→after (1440 / 1280)</th><th>Context Δ</th><th>Spend Δ</th></tr></thead><tbody>
+<tr><td>Intake</td><td>—</td><td>preflight: 0/1 ok (<code class="code-inline">challenge</code>, imperva)</td><td>n/a</td><td>n/a</td><td>—</td><td>not metered</td></tr>
+<tr><td>Capture (headed)</td><td>—</td><td>the user passed the Imperva check in the headed window; capture still timed out after 5 min</td><td>n/a</td><td>n/a</td><td>—</td><td>not metered</td></tr>
+<tr><td>Harness fix</td><td>skill <code class="code-inline">scripts/lib/access.js</code></td><td>the <code class="code-inline">imperva</code> script marker now counts as a challenge only on a near-empty page (&lt;1500 chars of text and &lt;150 elements), like the captcha-iframe rule. Approved by the user. Preflight then said <code class="code-inline">ok</code>; live capture got both widths</td><td>n/a</td><td>n/a</td><td>—</td><td>not metered</td></tr>
+<tr><td>Map</td><td>—</td><td>4 sections (header, intro, footer, footnote); plan approved: header + footer blocks rewritten, intro as default content, no new blocks</td><td>n/a</td><td>n/a</td><td>—</td><td>not metered</td></tr>
+<tr><td>Build 1</td><td>header, footer, intro (<code class="code-inline">Style: intro</code>), global styles</td><td>values from probes and live computed styles; font = the source&#x27;s own Google Fonts Montserrat variable woff2 (same file, hash checked)</td><td>— → 0 (all 4 sections)</td><td>— → 100 / 100 (all 4 sections)</td><td></td><td></td></tr>
+<tr><td>Lint</td><td>styles.css</td><td><code class="code-inline">#000</code> hex, a blank line before a comment, <code class="code-inline">clip</code> → <code class="code-inline">clip-path</code></td><td>0 → 0</td><td>100 → 100</td><td></td><td></td></tr>
+<tr><td>Publish</td><td>DA</td><td>flag uploaded to DA <code class="code-inline">/media/</code>; nav, footer, index uploaded and previewed on <code class="code-inline">ownitvoiceit-home-parity</code>; served blocks match</td><td>n/a</td><td>n/a</td><td></td><td></td></tr>
+<tr><td>Preview gate 1</td><td>—</td><td>offsets: footer and footnote +40px (an empty section left by the metadata block, with 40px margins)</td><td>header 2 (image rename), others 0</td><td>100 / 100</td><td></td><td></td></tr>
+<tr><td>Fix</td><td>styles.css</td><td><code class="code-inline">main &gt; .section:empty { display: none }</code></td><td>offsets 4/8 → 8/8</td><td>100 → 100</td><td></td><td></td></tr>
+<tr><td>Preview gate 2</td><td>—</td><td>6/8 pass; the 2 fails are only the flag&#x27;s <code class="code-inline">UNPAIRED</code> pairing (<code class="code-inline">american_flag.jpg</code> vs <code class="code-inline">media_13caf…jpg</code>, EDS media rename), pixels 100%</td><td>2 → 2 (header only)</td><td>100 / 100</td><td></td><td></td></tr>
+<tr><td><strong>Total since plan</strong></td><td></td><td></td><td></td><td></td><td><strong>+59.9k</strong> (138.7k → 198.6k)</td><td><strong>+$2.35</strong> ($327.11 → $329.46)</td></tr>
+</tbody></table></div>
+<h3>Results</h3>
+<ul class="hl-list"><li>Local (<code class="code-inline">http://localhost:3019/</code>): 8/8 PASS (100% pixels, 0 mismatches); offsets 8/8.</li><li>Branch preview: 6/8 PASS; header fails at both widths only on the renamed image pairing (pixels 100%). Offsets 8/8.</li><li><code class="code-inline">npm run lint</code>: clean.</li></ul>
+<h3>Notes / residuals</h3>
+<ul class="hl-list"><li>The h1 tagline is authored in <code class="code-inline">/nav</code>, as in the source, where it sits inside <code class="code-inline">&lt;header&gt;</code>. The user approved this.</li><li>The logo and header gradient are served from <code class="code-inline">/icons</code> (<code class="code-inline">ownitvoiceit_logo.svg</code>, <code class="code-inline">header_gradient.svg</code>, keeping the source file names so the gate pairs them). The social icons are Font Awesome SVG paths copied from the source page, inlined by footer.js.</li><li>Not verified: widths other than 1440 and 1280; hover states; the OneTrust cookie banner (hidden on both sides; the rebuild has none); the pages behind the legal links (they still point to ownitvoiceit.com).</li></ul>
+<p>Branch <code class="code-inline">ownitvoiceit-legal-pages</code>, cut from <code class="code-inline">main</code> after PR #1 (home) was merged. Baseline at the start of this batch: context 198.6k tokens; extra-usage spend $329.46 (from <code class="code-inline">get_usage</code>). Gate: ≥99% pixel and 0 computed-style mismatches per section at 1440 and 1280 (not lowered). The header and both footer bands are reused unchanged from the home build; the page body is new.</p>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Phase / iteration</th><th>Block / variant</th><th>Change</th><th>Mismatches before→after</th><th>Pixel before→after (1440 / 1280)</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Intake</td><td>—</td><td>preflight 4/4 ok (live; imperva script present, no challenge, thanks to the earlier <code class="code-inline">access.js</code> fix)</td><td>n/a</td><td>n/a</td><td>main already had the home code</td></tr>
+<tr><td>Capture</td><td>—</td><td>bundles for 3 pages × 2 widths, 4 sections each</td><td>n/a</td><td>n/a</td><td></td></tr>
+<tr><td>Map</td><td>—</td><td>per page: header, content, social band, legal band. Plan approved by the user: <code class="code-inline">legal</code> section style, new <code class="code-inline">table</code> block, relative links</td><td>n/a</td><td>n/a</td><td></td></tr>
+<tr><td>Build 1</td><td><code class="code-inline">legal</code> style, <code class="code-inline">table</code> block</td><td><code class="code-inline">extract.js</code> (verbatim) + <code class="code-inline">tools/legal_post.py</code></td><td>privacy 179, terms 0, sms 0</td><td>privacy 94.9 / 94.5, terms 99.95, sms 100</td><td>privacy: tables not matching</td></tr>
+<tr><td>Fix</td><td><code class="code-inline">table</code></td><td>the pipeline wraps loose cell text in <code class="code-inline">&lt;p&gt;</code>: unwrap single paragraphs</td><td>privacy 179 → 10</td><td>94.9 → 100</td><td></td></tr>
+<tr><td>Fix</td><td><code class="code-inline">table</code></td><td>the source cell is bare text + empty spacer <code class="code-inline">&lt;p&gt;</code> + real <code class="code-inline">&lt;p&gt;</code>: match that structure</td><td>privacy 10 → 0</td><td>100</td><td>local 8/8 on all three</td></tr>
+<tr><td>Preview 1</td><td>—</td><td><code class="code-inline">&lt;p&gt;&amp;nbsp;&lt;/p&gt;</code> paragraphs are dropped by the pipeline: bodies 224 / 1184 / 448px short (7 / 37 / 14 spacers × 32px)</td><td>privacy 71, terms 105, sms 43</td><td>88.7 / 74.0 / 74.7</td><td></td></tr>
+<tr><td>Preview 2</td><td>—</td><td><code class="code-inline">&lt;p&gt;&lt;br&gt;&lt;/p&gt;</code> is dropped too; every whitespace-only character is dropped (tested U+2003, U+2002, U+200A, U+3000); U+200B and U+2060 survive</td><td>—</td><td>—</td><td>tested on the sms page only</td></tr>
+<tr><td>Fix</td><td><code class="code-inline">scripts.js</code></td><td>author a zero-width-space paragraph; <code class="code-inline">decorateZeroWidthSpaces</code> turns it back into NBSP (not paired by the gate, as in the source)</td><td>terms 105 → 5, privacy 71 → 2, sms 43 → 0</td><td>99.9–100</td><td>heights and offsets match</td></tr>
+<tr><td>Fix</td><td><code class="code-inline">scripts.js</code></td><td>the pipeline trims a space at the end of an inline element (G15): 7 bold labels 4.5–9.1px narrow. Same marker, for spaces inside the closing tag that are followed by text</td><td>5 / 2 / 0 → 0</td><td>99.95–100</td><td></td></tr>
+<tr><td>Preview 3</td><td>—</td><td>content 100 / 99.95 / 100, 0 mismatches at both widths; offsets 8/8 on all 4 pages</td><td>content 0</td><td>see Results</td><td></td></tr>
+<tr><td><strong>Total this batch</strong></td><td></td><td></td><td></td><td></td><td>context +87.5k (198.6k → 286.1k); spend +$3.31 ($329.46 → $332.77)</td></tr>
+</tbody></table></div>
+<h3>Results (this batch)</h3>
+<ul class="hl-list"><li>Local: privacy 8/8 (100%), terms 8/8 (99.95% content), text-messaging 8/8 (100%); home still 8/8; offsets 8/8 on all 4 pages; <code class="code-inline">npm run lint</code> clean.</li><li>Branch preview: each page 6/8 and home 6/8. The only failures are the header at both widths: 2 mismatches each, both the flag&#x27;s image pairing (<code class="code-inline">american_flag.jpg</code> vs the EDS-renamed <code class="code-inline">media_13caf…jpg</code>); pixels 100%. Body and both footer bands: 0 mismatches, ≥99.95% pixels. Offsets 8/8 on all 4 pages.</li></ul>
+<h3>Notes / residuals</h3>
+<ul class="hl-list"><li><code class="code-inline">publish.js</code> reports &quot;2 authored vs 0 served&quot; for the privacy page. The served <code class="code-inline">/privacy-policy.plain.html</code> does contain both <code class="code-inline">&lt;div class=&quot;table&quot;&gt;</code> blocks, and the gate passes; the check&#x27;s block counter does not appear to count blocks inside a section that has a style class. Not changed in the skill.</li><li>Link decisions (user-approved): the footer&#x27;s three legal links and the body&#x27;s <code class="code-inline">prod.ownitvoiceit.com/privacy-policy/</code> link are now relative (<code class="code-inline">/privacy-policy</code>, …). The <code class="code-inline">prod.ownitvoiceit.com/.../Opt-Out.pdf</code> link and the <code class="code-inline">mailto:</code> links are verbatim. Changing the <code class="code-inline">/footer</code> fragment also changes the home page&#x27;s footer links.</li><li>Not verified: widths other than 1440 and 1280, hover/focus states, mobile, the cookie banner (hidden on both sides), and print.</li></ul></div></details>
+</section><section class="doc-section" id="decisions">
+<h2><span class="section-icon icon-purple"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5l3.5 3.5v7.75a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75zM3.5 3.5v9h9V6H9.5V3.5z"/></svg></span>Decisions &amp; assumptions</h2>
+<div class="section-rule"></div>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Decision</th><th>Detail</th></tr></thead><tbody><tr><td>Relative legal links</td><td>Footer legal links and the body&#x27;s prod.ownitvoiceit.com/privacy-policy/ link are relative. The Opt-Out.pdf link and mailto links stay verbatim. Changing /footer also changes the home page footer.</td></tr><tr><td>Tagline in /nav</td><td>User-approved.</td></tr></tbody></table></div>
+</section><section class="doc-section" id="limitations">
+<h2><span class="section-icon icon-orange"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575z"/></svg></span>Known limitations</h2>
+<div class="section-rule"></div>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody><tr><td>publish.js false report</td><td>Reports &quot;2 authored vs 0 served&quot; for the privacy page; the served plain.html does contain both table blocks and the gate passes.</td></tr><tr><td>Not verified</td><td>Widths other than 1440/1280, hover/focus, mobile, the OneTrust cookie banner (hidden on both sides; the rebuild has none) and print.</td></tr><tr><td>Home is default content</td><td>DA index.html is an h2 and a paragraph with section style intro and a metadata block; no custom block is used on it. The tagline and flag image are authored in /nav.</td></tr></tbody></table></div>
+</section><section class="doc-section" id="next-steps">
+<h2><span class="section-icon icon-blue"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8.22 2.97a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06l2.97-2.97H3.75a.75.75 0 010-1.5h7.44L8.22 4.03a.75.75 0 010-1.06z"/></svg></span>Next steps</h2>
+<div class="section-rule"></div>
+<ul class="checklist"><li class="check-item"><span class="check-mark cm-todo"></span><div class="check-body"><div class="check-title">Decide on a cookie-consent solution (the OneTrust banner is not rebuilt).</div></div></li><li class="check-item"><span class="check-mark cm-todo"></span><div class="check-body"><div class="check-title">Run mobile QA.</div></div></li><li class="check-item"><span class="check-mark cm-todo"></span><div class="check-body"><div class="check-title">Run QA on the branch preview and the main preview against the production site, section by section.</div></div></li><li class="check-item"><span class="check-mark cm-todo"></span><div class="check-body"><div class="check-title">Publish the pages to .aem.live once QA is signed off (merging main ships code only; content is previewed and published separately).</div></div></li></ul>
+</section><section class="doc-section" id="dev-notes">
+<h2><span class="section-icon icon-ink"><svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2zM3.5 4.5a1 1 0 011-1h7a1 1 0 011 1v7a1 1 0 01-1 1h-7a1 1 0 01-1-1z"/></svg></span>Developer notes</h2>
+<div class="section-rule"></div>
+<h3>Run locally</h3>
+<div class="code-block"><span class="cmt"># clone and install</span>
+git clone https://github.com/AdobeDrago/ownitvoiceit.git &amp;&amp; cd ownitvoiceit
+npm i
+<span class="cmt"># local code, previewed DA content</span>
+npx -y @adobe/aem-cli up
+<span class="cmt"># lint before every PR</span>
+npm run lint</div>
+<h3>Where things live</h3>
+<div class="table-scroll"><table class="spec-table"><thead><tr><th>Path</th><th>Purpose</th></tr></thead><tbody><tr><td>blocks/&lt;name&gt;/</td><td>Block JS + CSS (one folder per block)</td></tr><tr><td>scripts/scripts.js</td><td>Page decoration, auto-blocking, section styles</td></tr><tr><td>scripts/aem.js</td><td>Vendored AEM library — never edit</td></tr><tr><td>styles/styles.css</td><td>Global tokens and base styles (:root)</td></tr><tr><td>styles/fonts.css</td><td>Webfont @font-face rules</td></tr><tr><td>head.html</td><td>Head markup, CSP and script/style includes</td></tr><tr><td>import-work/</td><td>Migration sources, DA documents, gate configs and ledger</td></tr></tbody></table></div>
+<h3>Rules from the repo's AGENTS.md</h3>
+<ul class="hl-list"><li>Markup comes from the backend: fetch <code class="code-inline">/path.plain.html</code> before writing a block.</li><li><code class="code-inline">buildAutoBlocks</code> rewrites content before a block runs; authors omit and add cells, so decorate defensively.</li><li>Scope CSS to <code class="code-inline">.blockname</code>; <code class="code-inline">-wrapper</code> and <code class="code-inline">-container</code> are section classes.</li><li>A PR without a <code class="code-inline">{branch}--ownitvoiceit--AdobeDrago.aem.page/{path}</code> link is rejected.</li><li>Merging main ships code; content is previewed and published separately in DA.</li><li>All committed files are served — use <code class="code-inline">.hlxignore</code> for anything that should not be.</li></ul>
+<h3>Authoring workflow in DA.live</h3>
+<ol class="req-list"><li>Open <a href="https://da.live/#/adobedrago/ownitvoiceit" target="_blank" rel="noopener">da.live/#/adobedrago/ownitvoiceit</a> and edit the document.</li><li>Preview from DA (or use the Sidekick) and check <code class="code-inline">https://main--ownitvoiceit--adobedrago.aem.page/</code>.</li><li>For a code change, branch from main, push, and open the PR with the <code class="code-inline">&lt;branch&gt;--ownitvoiceit--adobedrago.aem.page</code> link.</li><li>Publish content to .aem.live after QA.</li></ol>
+</section>
+<footer class="doc-footer">
+  <span>Updated November 2026</span><span>·</span>
+  <span>Generated from the GitHub repos and DA.live content of the AdobeDrago organisation by <code class="code-inline">tools/collect.py</code> and <code class="code-inline">tools/build.py</code>.</span>
+</footer>
+</div></main>
+</div>
+<script>
+// Site switcher + scroll-spy for the sidebar. No dependencies.
+(function () {
+  var sel = document.getElementById('site-switch');
+  if (sel) sel.addEventListener('change', function () { if (sel.value) window.location.href = sel.value; });
+  var links = [].slice.call(document.querySelectorAll('.sidebar-link[href^="#"]'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        if (map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(function (s) { io.observe(s); });
+})();
+
+</script>
+</body>
+</html>
